@@ -27,29 +27,44 @@ import {
 
 import LoginScreen from '../frontend/screens/LoginScreen'
 import MapScreen from '../frontend/screens/MapScreen'
-
+import { useState, useMemo } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StartExchange from './screens/StartExchange';
 import SignUpScreen from './screens/SignUpScreen';
-
+import { AuthContext } from '../frontend/utility/AuthContext';
 
 const Stack = createNativeStackNavigator();
 
 
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const authContext = useMemo(() => ({
+    signIn: () => setIsAuthenticated(true),
+    signOut: () => setIsAuthenticated(false),
+  }), []);
 
   return (
-    <NavigationContainer>
-
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} /> 
-        <Stack.Screen name="MapScreen" component={MapScreen} />
-        <Stack.Screen name="StartExchange" component={StartExchange} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+        {isAuthenticated ? (
+            <>
+                <Stack.Screen name="MapScreen" component={MapScreen} />
+                <Stack.Screen name="StartExchange" component={StartExchange} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+              <Stack.Screen name="LoginScreen" component={LoginScreen} /> 
+              {/* Add more public screens here */}
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 
 }
