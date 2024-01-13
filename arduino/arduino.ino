@@ -192,6 +192,20 @@ void processPostRequest(WiFiClient client, String& title, String& author) {
   client.println();
 }
 
+String urlDecode(String str) {
+  int length = str.length();
+  String result = "";
+  for (int i = 0; i < length; i++) {
+    if (str[i] == '%' && str.substring(i, i+3) == "%20") {
+      result += ' ';
+      i += 2;
+    } else {
+      result += str[i];
+    }
+  }
+  return result;
+}
+
 void parseQueryString(char* queryString, Dictionary &dict) {
   char* str;
   str = strtok(queryString, "=");
@@ -201,7 +215,7 @@ void parseQueryString(char* queryString, Dictionary &dict) {
     char* value = str;
     str = strtok(NULL, "=");
 
-    dict(key, value);
+    dict(key, urlDecode(value));
   }
 }
 
