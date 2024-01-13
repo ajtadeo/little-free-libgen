@@ -2,17 +2,12 @@ import axios from 'axios';
 
 import {
     StyleSheet,
-    // Text,
-    // View,
   } from 'react-native';
 
 
 // screens/LoginScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
-// import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
-
-
 
 const styles = StyleSheet.create({
     container: {
@@ -41,7 +36,7 @@ const styles = StyleSheet.create({
     }
   });
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -55,13 +50,17 @@ const LoginScreen = () => {
       if (response.data) {
         // Login successful
         // Navigate to the next screen or do something else
+        alert("SUCCESS!")
+        navigation.navigate('MapScreen'); 
       } else {
         // Login failed
-        // Show an error message or do something else
+        // Write me code for an error message 
+        alert("Login failed; try again")
       }
     } catch (error) {
       // An error occurred
       // Show an error message or do something else
+      alert("Login failed due to an error; try again")
     }
   };
 
@@ -82,12 +81,10 @@ return (
         secureTextEntry
       />
       <View style={styles.button}>
-        <Button title="Login" onPress={handleLogin} color="transparent" />
+        <Button title="Login" onPress={handleLogin} color="white" />
       </View>
     </View>
   );
 };
-
-
 
 export default LoginScreen;
