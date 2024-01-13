@@ -26,6 +26,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import LoginScreen from '../frontend/screens/LoginScreen'
+import MapScreen from '../frontend/screens/MapScreen'
 
 // type SectionProps = PropsWithChildren<{
 //   title: string;
@@ -123,7 +124,7 @@ import LoginScreen from '../frontend/screens/LoginScreen'
 
 
 const App = () => {
-  return <LoginScreen />
+  return <MapScreen />
 }
 
 export default App;
