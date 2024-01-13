@@ -1,18 +1,5 @@
 import axios from 'axios';
 
-// const loginUser = async (username, password) => {
-//   try {
-//     const response = await axios.post('http://your-backend-url/auth/login', {
-//       username,
-//       password,
-//     });
-
-//     console.log(response.data.message); // Display success message
-//   } catch (error) {
-//     console.error(error.response.data.error); // Display error message
-//   }
-// };
-
 import {
     StyleSheet,
     // Text,
@@ -26,7 +13,6 @@ import { View, Text, TextInput, Button } from 'react-native';
 // import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 
 
-// import loginUser from '../services/authService';
 
 const styles = StyleSheet.create({
     container: {
