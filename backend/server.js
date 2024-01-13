@@ -46,7 +46,7 @@ app.get("/get-all-books", async function (req, res) {
 });
 
 app.post("/add-book/:title/:author/:isbn", async function (req, res) {
-    // returns false if user already exists, true if created successfully
+    // returns false if book already exists, true if added successfully
 
     const newBook = new Book({
         title: req.params.title,
@@ -55,8 +55,10 @@ app.post("/add-book/:title/:author/:isbn", async function (req, res) {
     })
 
     try {
+        // see if book already exists
         let foundBook = await Book.findOne({ isbn: req.params.isbn })
         if (foundBook == null) {
+            // if book doesn't exist, add new book
             try {
                 await newBook.save()
                 res.send(true)
@@ -65,7 +67,31 @@ app.post("/add-book/:title/:author/:isbn", async function (req, res) {
             }
         }
         else {
+            // if book exists already, return false
             res.send(false)
+        }
+
+    }
+    catch (error) {
+        res.send(error)
+    }
+
+})
+
+app.post("/checkout/:isbn", async function (req, res) {
+    try {
+        let foundBook = await Book.findOne({ isbn: req.params.isbn })
+        if (foundBook == null) {
+            res.send(false)
+        }
+        else {
+            try {
+                await Book.deleteOne({ isbn: req.params.isbn })
+            }
+            catch (error) {
+                res.send(error)
+            }
+            res.send(true)
         }
 
     }
