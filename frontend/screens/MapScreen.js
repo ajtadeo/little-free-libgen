@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     }
   });
 
-const MapScreen = () => {
+const MapScreen = ({navigation}) => {
 return (
     <View style={styles.container}>
         <Text style={styles.titleText}>
@@ -74,6 +74,7 @@ return (
                 style={styles.button}
                 title="Start Book Exchange"
                 color=""
+                onPress={() => navigation.navigate('StartExchange')}
             />
         </View>
     </View>
