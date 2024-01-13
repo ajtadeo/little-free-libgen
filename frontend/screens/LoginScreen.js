@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-const loginUser = async (username, password) => {
-  try {
-    const response = await axios.post('http://your-backend-url/auth/login', {
-      username,
-      password,
-    });
+// const loginUser = async (username, password) => {
+//   try {
+//     const response = await axios.post('http://your-backend-url/auth/login', {
+//       username,
+//       password,
+//     });
 
-    console.log(response.data.message); // Display success message
-  } catch (error) {
-    console.error(error.response.data.error); // Display error message
-  }
-};
+//     console.log(response.data.message); // Display success message
+//   } catch (error) {
+//     console.error(error.response.data.error); // Display error message
+//   }
+// };
 
 import {
     StyleSheet,
@@ -59,27 +59,25 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    loginUser(username, password);
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000/login', {
+        username,
+        password
+      });
+  
+      if (response.data) {
+        // Login successful
+        // Navigate to the next screen or do something else
+      } else {
+        // Login failed
+        // Show an error message or do something else
+      }
+    } catch (error) {
+      // An error occurred
+      // Show an error message or do something else
+    }
   };
-
-//   return (
-//     <View>
-//       <Text>Login Screen</Text>
-//       <TextInput
-//         placeholder="Username"
-//         value={username}
-//         onChangeText={(text) => setUsername(text)}
-//       />
-//       <TextInput
-//         placeholder="Password"
-//         value={password}
-//         onChangeText={(text) => setPassword(text)}
-//         secureTextEntry
-//       />
-//       <Button title="Login" onPress={handleLogin} />
-//     </View>
-//   );
 
 return (
     <View style={styles.container}>
