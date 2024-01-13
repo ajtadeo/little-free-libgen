@@ -1,32 +1,16 @@
 import axios from 'axios';
 
-// const loginUser = async (username, password) => {
-//   try {
-//     const response = await axios.post('http://your-backend-url/auth/login', {
-//       username,
-//       password,
-//     });
-
-//     console.log(response.data.message); // Display success message
-//   } catch (error) {
-//     console.error(error.response.data.error); // Display error message
-//   }
-// };
-
 import {
     StyleSheet,
-    // Text,
-    // View,
   } from 'react-native';
 
 
 // screens/LoginScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
-// import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 
+import Constants from "expo-constants";
 
-// import loginUser from '../services/authService';
 
 const styles = StyleSheet.create({
     container: {
@@ -55,13 +39,16 @@ const styles = StyleSheet.create({
     }
   });
 
-const LoginScreen = () => {
+// Replace uri with localhost:8000
+const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
+
+const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/login', {
+      const response = await axios.post('http://'+uri+'/login', {
         username,
         password
       });
@@ -69,13 +56,17 @@ const LoginScreen = () => {
       if (response.data) {
         // Login successful
         // Navigate to the next screen or do something else
+        alert("SUCCESS!")
+        navigation.navigate('MapScreen'); 
       } else {
         // Login failed
-        // Show an error message or do something else
+        // Write me code for an error message 
+        alert("Login failed; try again"+uri)
       }
     } catch (error) {
       // An error occurred
       // Show an error message or do something else
+      alert("Login failed due to an error; try again")
     }
   };
 
@@ -96,12 +87,10 @@ return (
         secureTextEntry
       />
       <View style={styles.button}>
-        <Button title="Login" onPress={handleLogin} color="transparent" />
+        <Button title="Login" onPress={handleLogin} color="white" />
       </View>
     </View>
   );
 };
-
-
 
 export default LoginScreen;

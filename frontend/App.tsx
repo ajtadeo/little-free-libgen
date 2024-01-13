@@ -27,11 +27,16 @@ import {
 
 import LoginScreen from '../frontend/screens/LoginScreen'
 import MapScreen from '../frontend/screens/MapScreen'
+import StartExchange from './screens/StartExchange';
+import CloseExchange from './screens/CloseExchange';
+
+import { registerRootComponent } from 'expo';
 
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import StartExchange from './screens/StartExchange';
+import SignUpScreen from './screens/SignUpScreen';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -45,13 +50,22 @@ const App = () => {
       {/* <MapScreen /> */}
 
       <Stack.Navigator initialRouteName="Home">
+        {/* isAuthenticed ?? <Stack.Screen name="SignUpScreen" component={SignUpScreen} /> : <></> */}
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} /> 
         <Stack.Screen name="MapScreen" component={MapScreen} />
-        {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
         <Stack.Screen name="StartExchange" component={StartExchange} />
+        <Stack.Screen name="CloseExchange" component={CloseExchange} />
       </Stack.Navigator>
+      {/* <Stack.Navigator initialRouteName='Authentication'>
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} /> 
+      </Stack.Navigator> */}
     </NavigationContainer>
   );
 
 }
+
+registerRootComponent(App);
 
 export default App;
