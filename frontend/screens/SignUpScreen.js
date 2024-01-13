@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
+import Constants from "expo-constants";
+
+// Replace uri with localhost:8000
+const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
 
 const SignUpScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -8,7 +12,7 @@ const SignUpScreen = ({navigation}) => {
 
   const handleSignUp = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/register', {
+      const response = await axios.post('http://'+uri+'/register', {
         username,
         password
       });
