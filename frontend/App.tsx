@@ -40,23 +40,15 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
 
-  // return <MapScreen />
   return (
     <NavigationContainer>
 
-      {/* <MapScreen /> */}
-
       <Stack.Navigator initialRouteName="Home">
-        {/* isAuthenticed ?? <Stack.Screen name="SignUpScreen" component={SignUpScreen} /> : <></> */}
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} /> 
         <Stack.Screen name="MapScreen" component={MapScreen} />
         <Stack.Screen name="StartExchange" component={StartExchange} />
       </Stack.Navigator>
-      {/* <Stack.Navigator initialRouteName='Authentication'>
-        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} /> 
-      </Stack.Navigator> */}
     </NavigationContainer>
   );
 
