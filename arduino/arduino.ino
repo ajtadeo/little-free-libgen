@@ -13,6 +13,8 @@
 #define SPEAKER 9
 #define TEMPO 35
 
+const int RELAY_PIN = A3;
+
 const int cntStartNotes = 7;
 int startNotes[cntStartNotes] = {NOTE_E6, NOTE_E6, NOTE_E6, NOTE_C6, NOTE_E6, NOTE_G6, NOTE_G5};
 int startDelay[2*cntStartNotes] = {2, 2, 2, 6, 2, 6, 2, 2, 2, 6, 8, 8, 8, 8};
@@ -40,6 +42,14 @@ void playSound(int n, int notes[], int rest[]) {
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+void unlockDoor() {
+  digitalWrite(RELAY_PIN, HIGH);
+}
+
+void lockDoor() {
+  digitalWrite(RELAY_PIN, LOW);
+}
 
 void drawUnlockScreen() {
   display.setTextSize(2);
@@ -243,6 +253,8 @@ void printWifiStatus() {
 void setup() {
   Serial.begin(9600);
 
+  pinMode(RELAY_PIN, OUTPUT);
+
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
     Serial.println(F("SSD1306 allocation failed"));
@@ -288,6 +300,7 @@ void loop() {
           processPostRequest(client, title, author);
           display.clearDisplay();
           drawUnlockScreen();
+          unlockDoor();
           playSound(cntStartNotes, startNotes, startDelay);
           delay(1000);
           display.clearDisplay();
@@ -298,6 +311,7 @@ void loop() {
           processPostRequest(client, title, author);
           display.clearDisplay();
           drawLockScreen();
+          lockDoor();
           playSound(cntDeathNotes, deathNotes, deathDelay);
           delay(1000);
           display.clearDisplay();
