@@ -9,6 +9,9 @@ import {
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 
+import Constants from "expo-constants";
+
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -36,13 +39,16 @@ const styles = StyleSheet.create({
     }
   });
 
+// Replace uri with localhost:8000
+const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
+
 const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/login', {
+      const response = await axios.post('http://'+uri+'/login', {
         username,
         password
       });
@@ -55,7 +61,7 @@ const LoginScreen = ({navigation}) => {
       } else {
         // Login failed
         // Write me code for an error message 
-        alert("Login failed; try again")
+        alert("Login failed; try again"+uri)
       }
     } catch (error) {
       // An error occurred

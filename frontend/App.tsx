@@ -27,13 +27,14 @@ import {
 
 import LoginScreen from '../frontend/screens/LoginScreen'
 import MapScreen from '../frontend/screens/MapScreen'
+import StartExchange from './screens/StartExchange';
+import CloseExchange from './screens/CloseExchange';
 
 import { registerRootComponent } from 'expo';
 
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import StartExchange from './screens/StartExchange';
 import SignUpScreen from './screens/SignUpScreen';
 
 

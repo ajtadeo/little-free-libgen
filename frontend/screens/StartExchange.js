@@ -1,45 +1,61 @@
-
-
-
-// const StartExchange = () => { 
-
-// }
-
-// export default StartExchange; import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from 'react';
+import { RNCamera } from 'react-native-camera';
 
-const StartExchange = () => {
-  const [field1, setField1] = useState('');
-  const [field2, setField2] = useState('');
-  const [firstButtonPressed, setFirstButtonPressed] = useState(false);
+const StartExchange = ({navigation}) => {
 
-  const handleFirstButtonPress = () => {
-    setFirstButtonPressed(true);
+  // Variables for dropdown menu
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+      {label: 'Ackerman Grand Ballroom', value: 'ackerman'},
+      {label: 'Venice Beach', value: 'venice'},
+      {label: 'Malibu', value: 'malibu'},
+  ]);
+
+  const [bookScanned, setBookScanned] = useState(false);
+
+  const [cameraOn, setCameraOn] = useState(false);
+
+  const handleScanButtonPress = () => {
+    setCameraOn(true);
+    // setBookScanned(true);
   };
 
-  const handleSecondButtonPress = () => {
-    // Handle the second button press
+  const handleOpenButtonPress = () => {
+    // Open door - need to send data to arduino
+    
+    // Go to next page on success
+    navigation.navigate('CloseExchange')
   };
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Field 1"
-        value={field1}
-        onChangeText={(text) => setField1(text)}
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder={'Select a Location'}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Field 2"
-        value={field2}
-        onChangeText={(text) => setField2(text)}
-      />
-      <Button title="First Button" onPress={handleFirstButtonPress} />
-      {firstButtonPressed && (
-        <Button title="Second Button" onPress={handleSecondButtonPress} />
-      )}
+      <Button title="Scan your book" onPress={handleScanButtonPress} disabled={value == null}/>
+      <Text>
+        Author: XXXXX
+      </Text>
+      <Text>
+        Title: XXXXX
+      </Text>
+      <Text>
+        IBSN: XXXXX
+      </Text>
+      <Button title="Unlock door" onPress={handleOpenButtonPress} disabled={!bookScanned} />
+
+      {/* {cameraOn ? (
+
+      ) : ()} */}
     </View>
   );
 };
