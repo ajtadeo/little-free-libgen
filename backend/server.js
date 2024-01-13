@@ -105,3 +105,6 @@ app.post("/checkout/:isbn", async function (req, res) {
 app.listen(8000, function (req, res) {
     console.log("Listening on port 8000")
 })
+
+const authRoutes = require('./routes/auth');
+app.use('/auth', authRoutes);
