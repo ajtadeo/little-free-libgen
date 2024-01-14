@@ -8,8 +8,11 @@ import {
 // screens/LoginScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
+import { useContext } from 'react';
+import { AuthContext } from '../utility/AuthContext';
 
-import Constants from "expo-constants";
+
+// import Constants from "expo-constants";
 
 
 const styles = StyleSheet.create({
@@ -40,15 +43,22 @@ const styles = StyleSheet.create({
   });
 
 // Replace uri with localhost:8000
-const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
+// const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
 
 const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
+
+  const { signIn } = useContext(AuthContext);
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://'+uri+'/login', {
+    //   const response = await axios.post('http://'+uri+'/login', {
+    //     username,
+    //     password
+    //   });
+      const response = await axios.post('http://localhost:8000/login', {
         username,
         password
       });
@@ -57,7 +67,9 @@ const LoginScreen = ({navigation}) => {
         // Login successful
         // Navigate to the next screen or do something else
         alert("SUCCESS!")
+        signIn();
         navigation.navigate('MapScreen'); 
+        
       } else {
         // Login failed
         // Write me code for an error message 
@@ -66,6 +78,7 @@ const LoginScreen = ({navigation}) => {
     } catch (error) {
       // An error occurred
       // Show an error message or do something else
+      alert(error)
       alert("Login failed due to an error; try again")
     }
   };

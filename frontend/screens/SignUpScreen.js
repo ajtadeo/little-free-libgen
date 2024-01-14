@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
-import Constants from "expo-constants";
+import { useContext } from 'react';
+import { AuthContext } from '../utility/AuthContext';
+
+// import Constants from "expo-constants";
 
 // Replace uri with localhost:8000
-const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
+// const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
 
 const SignUpScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const { signIn } = useContext(AuthContext);
+
   const handleSignUp = async () => {
     try {
-      const response = await axios.post('http://'+uri+'/register', {
+      // const response = await axios.post('http://'+uri+'/register', {
+      //   username,
+      //   password
+      // });
+      const response = await axios.post('http://localhost:8000/register', {
         username,
         password
       });
@@ -21,15 +30,18 @@ const SignUpScreen = ({navigation}) => {
         console.log(response.data)
         // Sign up successful
         // Navigate to the next screen or do something else
+        signIn();
         navigation.navigate('MapScreen'); 
 
       } else {
         // Sign up failed
         // Show an error message or do something else
+        alert("Invalid username or password; OR Login already exists")
       }
     } catch (error) {
       // An error occurred
       // Show an error message or do something else
+      alert(error)
     }
   };
 
