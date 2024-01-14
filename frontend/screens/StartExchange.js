@@ -1,95 +1,186 @@
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Button, StyleSheet, Alert } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { LinearGradient } from 'expo-linear-gradient';
+import axios from 'axios';
+import Constants from "expo-constants";
 
+// Replace uri with localhost:8000
+const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
 
-let camera;
+const API_KEY = "51458_52142ed37a007c81c614e8f9f6aa4d7a" // lol
+const DIRECTIONS = 0;
+const SCANNING = 1;
+const CONFIRMATION = 2;
 
-const StartExchange = ({navigation}) => {
+const StartExchange = ({ navigation }) => {
 
   // Variables for dropdown menu
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-      {label: 'Ackerman Grand Ballroom', value: 'ackerman'},
-      {label: 'Venice Beach', value: 'venice'},
-      {label: 'Malibu', value: 'malibu'},
+    { label: 'Ackerman Grand Ballroom', value: 'ackerman' },
+    { label: 'Venice Beach', value: 'venice' },
+    { label: 'Malibu', value: 'malibu' },
   ]);
 
-  const [bookScanned, setBookScanned] = useState(false);
-
-  const [cameraOn, setCameraOn] = useState(false);
-
-  const handleScanButtonPress = async () => {
-
-    const { status } = await BarCodeScanner.requestPermissionsAsync();
-    if(status === 'granted'){
-      setCameraOn(true);
-    }else{
-      Alert.alert("Access denied")
-    }
-    // setBookScanned(true);
-  };
-
-  const handleOpenButtonPress = () => {
-    // Open door - need to send data to arduino
-    
-    // Go to next page on success
-    navigation.navigate('CloseExchange')
-  };
-
+  const [state, setState] = useState(DIRECTIONS);
   const [scanned, setScanned] = useState(false);
-  const [hasPermission, setHasPermission] = useState(null);
-  
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [imageURI, setImageURI] = useState("");
+  const [isbn, setISBN] = useState("");
+
+  const getBookInfoFromISBN = async (bookISBN) => {
+    const bookRequest = await axios.get('https://api2.isbndb.com/book/' + bookISBN,
+      { headers: { 'User-Agent': 'insomnia/5.12.4', 'Authorization': API_KEY } })
+
+    const bookData = bookRequest.data.book;
+
+    // Outputs
+    const bookImageURI = bookData.image;
+    const bookAuthorNameSplit = bookData.authors[0].split(", ").reverse()
+    const bookAuthor = bookAuthorNameSplit.join(" ");
+    const bookTitle = bookData.title;
+
+    // console.log(bookImageURI);
+    // console.log(bookAuthor);
+    // console.log(bookTitle);
+
+    return [bookTitle, bookAuthor, bookImageURI, bookISBN]
+  }
+
+  const handleOpenCamera = async () => {
+    const { status } = await BarCodeScanner.requestPermissionsAsync();
+    if (status === 'granted') {
+      setState(SCANNING);
+    } else {
+      Alert.alert("Error", "Access denied")
+    }
   };
 
+  const addBookToDB = async () => {
+    try {
+      const response = await axios.post('http://' + uri + '/add-book', {
+        title: title,
+        author: author,
+        isbn: isbn,
+      })
 
+      if (response.data) {
+        return true
+        // Book successfully added
+        // do stuff
+
+      } else {
+        Alert.alert("book couldn't be saved");
+        return false
+      }
+
+    } catch (error) {
+      // An error occurred
+      // Show an error message or do something else
+      Alert.alert(error)
+    }
+  }
+
+  const handleUnlockLibrary = () => {
+    if (addBookToDB()) {
+      // TODO: send HTTP POST request to arduino
+      navigation.navigate('CloseExchange')
+    }
+  };
+
+  const handleBarCodeScanned = async ({ type, data }) => {
+    setScanned(true);
+    [bookTitle, bookAuthor, bookImageURI, bookISBN] = await getBookInfoFromISBN(data);
+    setAuthor(bookAuthor);
+    setTitle(bookTitle);
+    setImageURI(bookImageURI);
+    setISBN(bookISBN)
+    setState(CONFIRMATION);
+  };
 
   return (
-    <View style={styles.container}>
-      {cameraOn ? (
-        <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-      ) : (
-      <>
-        <DropDownPicker
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          placeholder={'Select a Location'}
-        />
-        <Button title="Scan your book" onPress={handleScanButtonPress} disabled={value == null}/>
-        <Text>
-          Author: XXXXX
-        </Text>
-        <Text>
-          Title: XXXXX
-        </Text>
-        <Text>
-          IBSN: XXXXX
-        </Text>
-        <Button title="Unlock door" onPress={handleOpenButtonPress} disabled={!bookScanned} />
-
-      </>
-      )}
-    </View>
+    <LinearGradient
+      colors={["#F5CA56", "#ED5658"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.background}
+    >
+      {
+        {
+          0:
+            <View style={styles.container}>
+              <Text style={styles.heading}>Checking In</Text>
+              <Text>Scan the barcode for the book you wish to check-in.</Text>
+              <Image source={require("../assets/images/barcode.jpg")} style={styles.image} />
+              <View style={{ alignItems: 'center' }}>
+                <View style={styles.button}>
+                  <Button title="Open Camera" onPress={handleOpenCamera} color="white" />
+                </View>
+              </View>
+            </View>,
+          1: <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={StyleSheet.absoluteFillObject}
+          />,
+          2:
+            <View style={styles.container}>
+              <Text style={styles.heading}>Checking In</Text>
+              <Image source={{ uri: imageURI }} style={styles.image} />
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.author}>{author}</Text>
+              <View style={{ alignItems: 'center' }}>
+                <View style={styles.button}>
+                  <Button title="Unlock Library" onPress={handleUnlockLibrary} color="white" />
+                </View>
+              </View>
+            </View>
+        }[state]
+      }
+    </LinearGradient >
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 10
+    backgroundColor: 'linear-gradient(#F5CA56, #ED5658)'
+  },
+  container: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    margin: 30,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5.8,
+  },
+  image: {
+    width: 300,
+    height: 350,
+    resizeMode: 'contain',
+  },
+  heading: {
+    fontSize: 32,
+    textAlign: 'left',
+    paddingBottom: 9,
+  },
+  title: {
+    fontSize: 16,
+    textAlign: 'center',
+    paddingBottom: 7,
+    fontWeight: 'bold',
+    paddingTop: 15
+  },
+  author: {
+    fontSize: 16,
+    textAlign: 'center',
+    paddingBottom: 20,
   },
   input: {
     height: 40,
@@ -97,7 +188,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10
-  }
+  },
+  button: {
+    backgroundColor: '#F5CA56',
+    borderWidth: 0,
+    borderRadius: 20,
+    padding: 10,
+    width: '50%',
+    marginBottom: 15,
+  },
 });
 
 
