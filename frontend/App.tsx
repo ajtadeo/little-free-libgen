@@ -56,7 +56,7 @@ const App = () => {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-        {isAuthenticated ? (
+        {!isAuthenticated ? (
             <>
                 <Stack.Screen name="MapScreen" component={MapScreen} />
                 <Stack.Screen name="StartExchange" component={StartExchange} />
@@ -77,6 +77,6 @@ const App = () => {
 }
 
 // Uncomment if you are trying to run on your custom device using expo
-// registerRootComponent(App);
+registerRootComponent(App);
 
 export default App;

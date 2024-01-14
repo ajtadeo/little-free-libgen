@@ -1,7 +1,10 @@
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from 'react';
-import { RNCamera } from 'react-native-camera';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+
+
+let camera;
 
 const StartExchange = ({navigation}) => {
 
@@ -18,8 +21,14 @@ const StartExchange = ({navigation}) => {
 
   const [cameraOn, setCameraOn] = useState(false);
 
-  const handleScanButtonPress = () => {
-    setCameraOn(true);
+  const handleScanButtonPress = async () => {
+
+    const { status } = await BarCodeScanner.requestPermissionsAsync();
+    if(status === 'granted'){
+      setCameraOn(true);
+    }else{
+      Alert.alert("Access denied")
+    }
     // setBookScanned(true);
   };
 
@@ -30,32 +39,48 @@ const StartExchange = ({navigation}) => {
     navigation.navigate('CloseExchange')
   };
 
+  const [scanned, setScanned] = useState(false);
+  const [hasPermission, setHasPermission] = useState(null);
+  
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+  };
+
+
+
   return (
     <View style={styles.container}>
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        placeholder={'Select a Location'}
+      {cameraOn ? (
+        <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
       />
-      <Button title="Scan your book" onPress={handleScanButtonPress} disabled={value == null}/>
-      <Text>
-        Author: XXXXX
-      </Text>
-      <Text>
-        Title: XXXXX
-      </Text>
-      <Text>
-        IBSN: XXXXX
-      </Text>
-      <Button title="Unlock door" onPress={handleOpenButtonPress} disabled={!bookScanned} />
+      ) : (
+      <>
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={items}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setItems}
+          placeholder={'Select a Location'}
+        />
+        <Button title="Scan your book" onPress={handleScanButtonPress} disabled={value == null}/>
+        <Text>
+          Author: XXXXX
+        </Text>
+        <Text>
+          Title: XXXXX
+        </Text>
+        <Text>
+          IBSN: XXXXX
+        </Text>
+        <Button title="Unlock door" onPress={handleOpenButtonPress} disabled={!bookScanned} />
 
-      {/* {cameraOn ? (
-
-      ) : ()} */}
+      </>
+      )}
     </View>
   );
 };

@@ -1,4 +1,12 @@
 {
   "name": "frontend",
-  "displayName": "frontend"
+  "displayName": "frontend",
+  "plugins": [
+    [
+      "expo-barcode-scanner",
+      {
+        "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
+      }
+    ]
+  ]
 }
