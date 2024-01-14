@@ -15,15 +15,6 @@ const CONFIRMATION = 2;
 
 const StartExchange = ({ navigation }) => {
 
-  // Variables for dropdown menu
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: 'Ackerman Grand Ballroom', value: 'ackerman' },
-    { label: 'Venice Beach', value: 'venice' },
-    { label: 'Malibu', value: 'malibu' },
-  ]);
-
   const [state, setState] = useState(DIRECTIONS);
   const [scanned, setScanned] = useState(false);
   const [title, setTitle] = useState("");
@@ -68,13 +59,11 @@ const StartExchange = ({ navigation }) => {
       })
 
       if (response.data) {
-        return true
         // Book successfully added
         // do stuff
 
       } else {
         Alert.alert("book couldn't be saved");
-        return false
       }
 
     } catch (error) {
@@ -85,10 +74,9 @@ const StartExchange = ({ navigation }) => {
   }
 
   const handleUnlockLibrary = () => {
-    if (addBookToDB()) {
-      // TODO: send HTTP POST request to arduino
-      navigation.navigate('CloseExchange')
-    }
+    addBookToDB()
+    // TODO: send HTTP POST request to arduino
+    navigation.navigate('CloseExchange')
   };
 
   const handleBarCodeScanned = async ({ type, data }) => {
