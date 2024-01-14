@@ -61,7 +61,7 @@ const App = () => {
           initialRouteName="Home"
           screenOptions={{headerShown: false}}
         >
-        {!isAuthenticated ? (
+        {isAuthenticated ? (
             <>
                 <Stack.Screen name="MapScreen" component={MapScreen} />
                 <Stack.Screen name="StartExchange" component={StartExchange} />
