@@ -55,8 +55,11 @@ const App = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-        {!isAuthenticated ? (
+        <Stack.Navigator 
+          initialRouteName="Home"
+          screenOptions={{headerShown: false}}
+        >
+        {isAuthenticated ? (
             <>
                 <Stack.Screen name="MapScreen" component={MapScreen} />
                 <Stack.Screen name="StartExchange" component={StartExchange} />
