@@ -93,7 +93,52 @@ const handleCloseBottomSheet = () => {
   setIsBottomSheetOpen(false);
 };
 
+// This state would determine if the drawer sheet is visible or not
+const [isBottomSheetOpenHill, setIsBottomSheetOpenHill] = useState(false);
+
+// Function to open the bottom sheet 
+const handleOpenBottomSheetHill = () => {
+  setIsBottomSheetOpenHill(true);
+};
+
+// Function to close the bottom sheet
+const handleCloseBottomSheetHill = () => {
+  setIsBottomSheetOpenHill(false);
+};
+
+
+// This state would determine if the drawer sheet is visible or not
+const [isBottomSheetOpenWest, setIsBottomSheetOpenWest] = useState(false);
+
+// Function to open the bottom sheet 
+const handleOpenBottomSheetWest = () => {
+  setIsBottomSheetOpenWest(true);
+};
+
+// Function to close the bottom sheet
+const handleCloseBottomSheetWest = () => {
+  setIsBottomSheetOpenWest(false);
+};
+
+
+// This state would determine if the drawer sheet is visible or not
+const [isBottomSheetOpenSaw, setIsBottomSheetOpenSaw] = useState(false);
+
+// Function to open the bottom sheet 
+const handleOpenBottomSheetSaw = () => {
+  setIsBottomSheetOpenSaw(true);
+};
+
+// Function to close the bottom sheet
+const handleCloseBottomSheetSaw = () => {
+  setIsBottomSheetOpenSaw(false);
+};
+
 const [books, setBooks] = useState([]);
+
+const booksWest = [[{author: "George Orwell", title: "Animal Farm", isbn: "9780452284241"}, {author: "Victor Hugo", title: "Les Misérables", isbn: "2011550491"}]]
+const booksHill = [[{author: "J.R.R. Tolkien", title: "The Hobbit", isbn: "9780547928227"}, {author: "The Poet", title: "Michael Connelly", isbn: "9780446602617"}]]
+const booksSaw = [[{author: "F. Scott Fitzgerald", title: "The Great Gatsby", isbn: "9780743273565"}, {author: "Stendhal", title: "Le Rouge et le Noir ", isbn: "9781483903590"}]]
 
 useEffect(() => {
   async function fetchBooks() {
@@ -106,8 +151,6 @@ useEffect(() => {
       arraysSplit.push(reponseArray.splice(0, 2));
     }
     setBooks(arraysSplit)
-
-    // console.log(arraysSplit)
   }
 
   fetchBooks()
@@ -116,7 +159,9 @@ useEffect(() => {
 const renderRow = (item) => {
   console.log(item)
   return (
-    <View style={{ margin: 10, flexDirection:"row", fontFamily: 'Gill Sans' }}>   
+
+    <View style={{ margin: 10, flexDirection:"row", fontFamily: 'Gill Sans', paddingBottom: 20}}>   
+
       <View style={{
           // backgroundColor: 'red',
           width: 150,
@@ -126,7 +171,7 @@ const renderRow = (item) => {
           fontFamily: 'Gill Sans'
         }}>
         <Image
-          style={{width: 150, height: 225}}
+          style={{width: 150, height: 225, marginBottom: 5}}
           source={{
             uri: 'http://covers.openlibrary.org/b/isbn/'+item[0].isbn+'-L.jpg',
             fontFamily: 'Gill Sans'
@@ -145,7 +190,7 @@ const renderRow = (item) => {
           fontFamily: 'Gill Sans'
         }}>
         <Image
-          style={{width: 150, height: 225}}
+          style={{width: 150, height: 225, marginBottom: 5}}
           source={{
             uri: 'http://covers.openlibrary.org/b/isbn/'+item[1].isbn+'-L.jpg',
           }}
@@ -155,6 +200,40 @@ const renderRow = (item) => {
       </View>
     </View>
   );
+}
+
+function CustomModal(props) {
+  return (
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={props.isBottomSheetOpenC}
+      onRequestClose={props.handleCloseBottomSheetC} >
+
+        <View style={[styles.bottomSheet, { height: windowHeight * 0.8 }]}>
+
+          <View style={{ flex: 0, width: '100%', justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
+            <Text style={{fontSize: 25}}>{props.name == "A" ? "Ackerman Grand     \nBallroom" : props.name}</Text>
+            <TouchableOpacity style={{backgroundColor: '#F5CA56', borderRadius: 30, width: 60, height: 60, justifyContent: 'center', alignItems: 'center'}} onPress={() => {props.handleCloseBottomSheetC(); navigation.navigate('StartExchange')}}>
+              <Image style={{width: 40, height: 26.9}} source={exchange} />
+            </TouchableOpacity>
+            <TouchableOpacity style={{width: 20, height: 20, justifyContent: 'center', alignItems: 'center'}} onPress={props.handleCloseBottomSheetC}>
+              <Image style={{width: 10, height: 10}} source={cross} />
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 0, width: '100%', justifyContent: 'space-between', flexDirection: 'row' }}>
+            <Text style={{textAlign: 'left',fontSize: 15}}>Current Catalog</Text>
+          </View>
+          <View style={styles.imageCont}>
+
+            <FlatList data={props.booksC}
+              vertical={true}
+              renderItem={({ item, index }) => renderRow(item)} />      
+          </View>
+
+      </View>
+    </Modal>
+  )
 }
 
 return (
@@ -178,64 +257,30 @@ return (
             <Marker
               coordinate={{latitude: 34.071804633660406, longitude: -118.45139024588147}}
               title='The Hill'
+              onCalloutPress={handleOpenBottomSheetHill}
               >
             </Marker>
             <Marker
               coordinate={{latitude: 34.06092689230064, longitude: -118.4459415512844}}
               title='Westwood Village'
+              onCalloutPress={handleOpenBottomSheetWest}
               >
             </Marker>
             <Marker
             
               coordinate={{latitude: 34.03993942083151, longitude: -118.44281384255683}}
               title='Sawtelle'
+              onCalloutPress={handleOpenBottomSheetSaw}
               >
             </Marker>
         </MapView>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isBottomSheetOpen}
-          onRequestClose={handleCloseBottomSheet} >
 
-            <View style={[styles.bottomSheet, { height: windowHeight * 0.6 }]}>
+        <CustomModal isBottomSheetOpenC={isBottomSheetOpen} handleCloseBottomSheetC={handleCloseBottomSheet} booksC={books} name="A"/>
+        <CustomModal isBottomSheetOpenC={isBottomSheetOpenHill} handleCloseBottomSheetC={handleCloseBottomSheetHill} booksC={booksHill} name="The Hill                     "/>
+        <CustomModal isBottomSheetOpenC={isBottomSheetOpenWest} handleCloseBottomSheetC={handleCloseBottomSheetWest} booksC={booksWest} name="Westwood Village  "/>
+        <CustomModal isBottomSheetOpenC={isBottomSheetOpenSaw} handleCloseBottomSheetC={handleCloseBottomSheetSaw} booksC={booksSaw} name="Sawtelle                    "/>
 
-              <View style={{ flex: 0, width: '100%', justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20, fontFamily: 'Cochin'}}>
-                <Text style={{fontSize: 25, fontWeight: "bold", fontFamily: "Cochin"}}>{"Ackerman Grand\nBallroom"}</Text>
-                <TouchableOpacity style={{backgroundColor: '#F5CA56', borderRadius: 30, width: 60, height: 60, justifyContent: 'center', alignItems: 'center'}} onPress={() => {handleCloseBottomSheet(); navigation.navigate('StartExchange')}}>
-                  <Image style={{width: 40, height: 26.9}} source={exchange} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: 20, height: 20, justifyContent: 'center', alignItems: 'center'}} onPress={handleCloseBottomSheet}>
-                  <Image style={{width: 10, height: 10}} source={cross} />
-                </TouchableOpacity>
-              </View>
-              <View style={{ flex: 0, width: '100%', justifyContent: 'space-between', flexDirection: 'row' }}>
-                <Text style={{textAlign: 'left',fontSize: 15, fontFamily: "Cochin"}}>Current Catalog</Text>
-              </View>
-              <View style={styles.imageCont}>
 
-                <FlatList data={books}
-                  vertical={true}
-                  renderItem={({ item, index }) => renderRow(item)} />
-                  
-                {/* {books.map(book => (
-                  <View style={styles.bookCont} key={book.title}>
-                    <Image
-                      style={styles.bookImage}
-                      source={{
-                        uri: 'http://covers.openlibrary.org/b/isbn/'+book.isbn+'-M.jpg',
-                      }}
-                    />
-                    <Text>{book.title}</Text>
-                    <Text>{book.author}</Text>
-                  </View>
-                ))} */}
-                
-                
-              </View>
-
-          </View>
-        </Modal>
     </View>
   );
 };
