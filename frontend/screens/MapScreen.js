@@ -19,23 +19,26 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       paddingHorizontal: 10,
-
+      fontFamily: 'Gill Sans', 
     },
     map: {
         flex: 1,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        fontFamily: 'Gill Sans', 
     },
     titleText: {
         textAlign: 'center',
         fontSize: 30,
         backgroundColor: 'red',
+        fontFamily: 'Gill Sans', 
     },
     input: {
       height: 40,
       borderColor: 'gray',
       borderWidth: 1,
       marginBottom: 10,
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
+      fontFamily: 'Gill Sans', 
     },
     button: {
       backgroundColor: '#1E90FF',
@@ -43,11 +46,13 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius: 5,
       padding: 10,
-      marginBottom: 10
+      marginBottom: 10, 
+      fontFamily: 'Gill Sans', 
     },
     bookImage: {
       width: 100,
       height: 150,
+      fontFamily: 'Gill Sans', 
     },
     bottomSheet: {
       position: 'absolute',
@@ -64,7 +69,8 @@ const styles = StyleSheet.create({
       shadowColor: 'gray',
       shadowOffset: { width: 0, height: -1 },
       shadowOpacity: 0.8,
-      shadowRadius: 4,  
+      shadowRadius: 4,
+      fontFamily: 'Gill Sans',   
   },
   });
 
@@ -110,22 +116,24 @@ useEffect(() => {
 const renderRow = (item) => {
   console.log(item)
   return (
-    <View style={{ margin: 10, flexDirection:"row" }}>   
+    <View style={{ margin: 10, flexDirection:"row", fontFamily: 'Gill Sans' }}>   
       <View style={{
           // backgroundColor: 'red',
           width: 150,
           height: 250,
           marginRight: 30,
-          alignItems: 'center'
+          alignItems: 'center',
+          fontFamily: 'Gill Sans'
         }}>
         <Image
           style={{width: 150, height: 225}}
           source={{
             uri: 'http://covers.openlibrary.org/b/isbn/'+item[0].isbn+'-L.jpg',
+            fontFamily: 'Gill Sans'
           }}
         />
-        <Text style={{textAlign: 'center' ,fontSize: 15}}>{item[0].title}</Text>
-        <Text style={{textAlign: 'center',fontSize: 10}}>{item[0].author}</Text>
+        <Text style={{textAlign: 'center' ,fontSize: 15, fontFamily: 'Gill Sans'}}>{item[0].title}</Text>
+        <Text style={{textAlign: 'center',fontSize: 10, fontFamily: 'Gill Sans'}}>{item[0].author}</Text>
       </View> 
 
       <View
@@ -133,7 +141,8 @@ const renderRow = (item) => {
           // backgroundColor: 'green',
           width: 150,
           height: 250,
-          alignItems: 'center'
+          alignItems: 'center',
+          fontFamily: 'Gill Sans'
         }}>
         <Image
           style={{width: 150, height: 225}}
@@ -141,8 +150,8 @@ const renderRow = (item) => {
             uri: 'http://covers.openlibrary.org/b/isbn/'+item[1].isbn+'-L.jpg',
           }}
         />
-        <Text style={{textAlign: 'center',fontSize: 15}}>{item[1].title}</Text>
-        <Text style={{textAlign: 'center',fontSize: 10}}>{item[1].author}</Text>
+        <Text style={{textAlign: 'center',fontSize: 15, fontFamily: 'Gill Sans'}}>{item[1].title}</Text>
+        <Text style={{textAlign: 'center',fontSize: 10, fontFamily: 'Gill Sans'}}>{item[1].author}</Text>
       </View>
     </View>
   );
@@ -177,6 +186,7 @@ return (
               >
             </Marker>
             <Marker
+            
               coordinate={{latitude: 34.03993942083151, longitude: -118.44281384255683}}
               title='Sawtelle'
               >
@@ -190,8 +200,8 @@ return (
 
             <View style={[styles.bottomSheet, { height: windowHeight * 0.6 }]}>
 
-              <View style={{ flex: 0, width: '100%', justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                <Text style={{fontSize: 25}}>{"Ackerman Grand\nBallroom"}</Text>
+              <View style={{ flex: 0, width: '100%', justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20, fontFamily: 'Cochin'}}>
+                <Text style={{fontSize: 25, fontWeight: "bold", fontFamily: "Cochin"}}>{"Ackerman Grand\nBallroom"}</Text>
                 <TouchableOpacity style={{backgroundColor: '#F5CA56', borderRadius: 30, width: 60, height: 60, justifyContent: 'center', alignItems: 'center'}} onPress={() => {handleCloseBottomSheet(); navigation.navigate('StartExchange')}}>
                   <Image style={{width: 40, height: 26.9}} source={exchange} />
                 </TouchableOpacity>
@@ -200,7 +210,7 @@ return (
                 </TouchableOpacity>
               </View>
               <View style={{ flex: 0, width: '100%', justifyContent: 'space-between', flexDirection: 'row' }}>
-                <Text style={{textAlign: 'left',fontSize: 15}}>Current Catalog</Text>
+                <Text style={{textAlign: 'left',fontSize: 15, fontFamily: "Cochin"}}>Current Catalog</Text>
               </View>
               <View style={styles.imageCont}>
 

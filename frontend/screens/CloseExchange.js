@@ -99,7 +99,7 @@ const CloseExchange = ({ navigation }) => {
           0:
             <View style={styles.container}>
               <Text style={styles.heading}>Checking Out</Text>
-              <Text>Scan the barcode for the book you wish to check-out.</Text>
+              <Text style={{fontFamily: "Optima"}}>Scan the barcode for the book you wish to check-out.</Text>
               <Image source={require("../assets/images/barcode.jpg")} style={styles.image} />
               <View style={{ alignItems: 'center' }}>
                 <View style={styles.button}>
@@ -159,25 +159,30 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: 'left',
     paddingBottom: 9,
+    fontWeight: 'bold',
+    fontFamily: 'Cochin'
   },
   title: {
     fontSize: 16,
     textAlign: 'center',
     paddingBottom: 7,
     fontWeight: 'bold',
-    paddingTop: 15
+    paddingTop: 15, 
+    fontFamily: 'Optima'
   },
   author: {
     fontSize: 16,
     textAlign: 'center',
     paddingBottom: 20,
+    fontFamily: 'Optima'
   },
   input: {
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 10,
-    paddingHorizontal: 10
+    paddingHorizontal: 10, 
+    fontFamily: 'Optima'
   },
   button: {
     backgroundColor: '#F5CA56',
@@ -186,12 +191,14 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '50%',
     marginBottom: 7,
+    fontFamily: 'Optima'
   },
   link: {
     textAlign: 'center',
     fontSize: 16,
     color: '#ED5658',
-    marginBottom: 15
+    marginBottom: 15,
+    fontFamily: 'Optima'
   }
 });
 
