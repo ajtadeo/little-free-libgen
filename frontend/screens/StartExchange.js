@@ -1,5 +1,4 @@
-import { View, Text, Image, Button, StyleSheet, Alert } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { View, Text, Image, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -137,6 +136,11 @@ const StartExchange = ({ navigation }) => {
                   <Button title="Unlock Library" onPress={handleUnlockLibrary} color="white" />
                 </View>
               </View>
+              <TouchableOpacity
+                onPress={() => {setState(SCANNING); setScanned(false)}}
+              >
+                <Text style={styles.link}>Not your book?</Text>
+              </TouchableOpacity>
             </View>
         }[state]
       }
@@ -195,8 +199,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     width: '50%',
-    marginBottom: 15,
+    marginBottom: 7,
   },
+  link: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#ED5658',
+    marginBottom: 15
+  }
 });
 
 
