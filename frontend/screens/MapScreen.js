@@ -155,8 +155,8 @@ return (
             initialRegion={{
                 latitude: 34.070552338396695,
                 longitude: -118.44415646276776,
-                latitudeDelta: .05,
-                longitudeDelta: .05
+                latitudeDelta: .03,
+                longitudeDelta: .03
             }} >
             
             <Marker
@@ -165,6 +165,21 @@ return (
                 onCalloutPress={handleOpenBottomSheet}
             
             >
+            </Marker>
+            <Marker
+              coordinate={{latitude: 34.071804633660406, longitude: -118.45139024588147}}
+              title='The Hill'
+              >
+            </Marker>
+            <Marker
+              coordinate={{latitude: 34.06092689230064, longitude: -118.4459415512844}}
+              title='Westwood Village'
+              >
+            </Marker>
+            <Marker
+              coordinate={{latitude: 34.03993942083151, longitude: -118.44281384255683}}
+              title='Sawtelle'
+              >
             </Marker>
         </MapView>
         <Modal
