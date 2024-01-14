@@ -8,6 +8,7 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  AppRegistry,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -49,6 +50,8 @@ const App = () => {
     signOut: () => setIsAuthenticated(false),
   }), []);
 
+  AppRegistry.registerComponent('frontend', () => App)
+
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
@@ -73,6 +76,6 @@ const App = () => {
 
 }
 
-registerRootComponent(App);
+// registerRootComponent(App);
 
 export default App;

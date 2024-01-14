@@ -12,7 +12,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../utility/AuthContext';
 
 
-import Constants from "expo-constants";
+// import Constants from "expo-constants";
 
 
 const styles = StyleSheet.create({
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   });
 
 // Replace uri with localhost:8000
-const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
+// const uri = Constants.manifest2.extra.expoClient.hostUri.split(':').shift().concat(':8000');
 
 const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -54,7 +54,11 @@ const LoginScreen = ({navigation}) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://'+uri+'/login', {
+    //   const response = await axios.post('http://'+uri+'/login', {
+    //     username,
+    //     password
+    //   });
+      const response = await axios.post('http://localhost:8000/login', {
         username,
         password
       });
