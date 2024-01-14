@@ -76,6 +76,7 @@ const App = () => {
 
 }
 
+// Uncomment if you are trying to run on your custom device using expo
 // registerRootComponent(App);
 
 export default App;
