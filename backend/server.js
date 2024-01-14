@@ -202,6 +202,16 @@ app.post("/checkout", async function (req, res) {
 
 })
 
+app.get("/get-leaderboard", async function (req, res) {
+
+    try {
+        const topUsers = await User.find().sort({ points: -1 }).limit(10);
+        res.send(topUsers)
+    } catch (error) {
+        res.send(error)
+    }
+
+})
 
 app.listen(8000, function (req, res) {
     console.log("Listening on port 8000")
