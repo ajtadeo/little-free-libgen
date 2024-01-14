@@ -26,14 +26,16 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import LoginScreen from '../frontend/screens/LoginScreen'
-import MapScreen from '../frontend/screens/MapScreen'
+import LoginScreen from '../frontend/screens/LoginScreen';
+import MapScreen from '../frontend/screens/MapScreen';
+import UserInfo from '../frontend/screens/UserInfo';
 import StartExchange from './screens/StartExchange';
 import CloseExchange from './screens/CloseExchange';
 
 import { registerRootComponent } from 'expo';
-import { useState, useMemo } from 'react'
+import { useState, useMemo } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUpScreen from './screens/SignUpScreen';
@@ -64,6 +66,7 @@ const App = () => {
                 <Stack.Screen name="MapScreen" component={MapScreen} />
                 <Stack.Screen name="StartExchange" component={StartExchange} />
                 <Stack.Screen name="CloseExchange" component={CloseExchange} />
+                <Stack.Screen name="UserInfo" component={UserInfo} />
             </>
           ) : (
             <>
