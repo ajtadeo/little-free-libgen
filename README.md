@@ -19,10 +19,10 @@ Built by [Charles Bucquet](https://github.com/cbucquet),  [Marcus Cheng](https:/
 * SolidWorks
 
 ## What it does
-Little Free Libgen is composed of a network of library units with their contents easily accessible through a mobile app. Users can exchange a book by scanning the ISBN barcodes of the checked-in and checked-out books. This unlocks and locks the library while simultaneously updating the unit's catalog of currently present books. Each the catalog of each library unit can be explored on app's the main map page.
+Little Free Libgen is composed of a network of library units with their contents easily accessible through a mobile app. Users can exchange a book by scanning the ISBN barcodes of the checked-in and checked-out books. This unlocks and locks the library while simultaneously updating the unit's catalog of currently present books. Each library unit's catalog can be explored on app's the main map page.
 
 ## How we built it
-Our library unit was entirely designed in SolidWorks. These units feature laser-cut acrylic and 3D printed hinges and handles. Housed within this library unit is a central Arduino Nano 33 IoT which hosts a web server to wireless communicate with our mobile app over WiFi. This Arduino controls a solenoid to lock/unlock the library unit, an OLED display to instruct the user, and a buzzer for audio feedback. 
+Our library unit was entirely designed in SolidWorks. These units feature laser-cut acrylic and 3D printed hinges and handles. Housed within this library unit is a central Arduino Nano 33 IoT hosting a web server to wireless communicate with our mobile app over WiFi. This Arduino also controls a solenoid to lock/unlock the library unit, an OLED display to instruct the user, and a buzzer for audio feedback. 
 
 <img width="337" alt="image" src="https://github.com/ajtadeo/little-free-libgen/assets/76643809/e02e5589-8768-4508-9811-b13cbed00f4d">
 
@@ -32,13 +32,22 @@ _SolidWorks Mockup_
 
 _Arduino Schematic_
 
-For the mobile app, we used a MongoDB database in the backend and used React Native in the frontend which are connected through an Express API. Through our app users can view all library unit catalogs and scan ISBN barcodes to check-in/check-out books. Scanning an IBSN barcode prompts an API call to [IBSNdb](https://isbndb.com/) which fetches a book's title, author, IBSN, and cover image. Using this database, virtually any book can be checked-in or checked-out of our library units!
+For the mobile app, we used a MongoDB database in the backend, React Native in the frontend, and build an Express API for communication between the two. Through our app, users can view all library unit catalogs and scan ISBN barcodes to check-in/check-out books. Scanning an IBSN barcode prompts an API call to [IBSNdb](https://isbndb.com/) which fetches a book's title, author, IBSN, and cover image. Using this database, virtually any book can be checked-in or checked-out of our library units!
 
 ## Idea Hacks 2024
 
-<img width="337" alt="image" src="https://github.com/ajtadeo/little-free-libgen/assets/76643809/9e4df5af-1ee5-4cda-be1b-38a827341ed4">
+<img height="400" alt="image" src="https://github.com/ajtadeo/little-free-libgen/assets/76643809/9e4df5af-1ee5-4cda-be1b-38a827341ed4">
 
-_Library Unit_
+_Library Unit Locked_
+
+<img height="400" alt="image" src="https://github.com/ajtadeo/little-free-libgen/assets/76643809/9cdbdf97-03f5-4261-841d-80a704faa13c">
+
+_Library Unit Unlocked_
+
+<img height="400" alt="image" src="https://github.com/ajtadeo/little-free-libgen/assets/76643809/245c2544-9fd2-4568-b4fa-7aca55e54e91">
+
+_OLED Display_
+
 
 <img width="337" alt="image" src="https://github.com/ajtadeo/little-free-libgen/assets/76643809/1bdb3036-96b4-4f45-bf26-1bc9b7aafa2d">
 
