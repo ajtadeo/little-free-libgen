@@ -153,7 +153,7 @@ useEffect(() => {
 const renderRow = (item) => {
   console.log(item)
   return (
-    <View style={{ margin: 10, flexDirection:"row" }}>   
+    <View style={{ margin: 10, flexDirection:"row", paddingBottom: 20 }}>   
       <View style={{
           // backgroundColor: 'red',
           width: 150,
@@ -162,7 +162,7 @@ const renderRow = (item) => {
           alignItems: 'center'
         }}>
         <Image
-          style={{width: 150, height: 225}}
+          style={{width: 150, height: 225, marginBottom: 5}}
           source={{
             uri: 'http://covers.openlibrary.org/b/isbn/'+item[0].isbn+'-L.jpg',
           }}
@@ -179,7 +179,7 @@ const renderRow = (item) => {
           alignItems: 'center'
         }}>
         <Image
-          style={{width: 150, height: 225}}
+          style={{width: 150, height: 225, marginBottom: 5}}
           source={{
             uri: 'http://covers.openlibrary.org/b/isbn/'+item[1].isbn+'-L.jpg',
           }}
