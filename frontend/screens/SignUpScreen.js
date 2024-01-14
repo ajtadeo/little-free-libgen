@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: 'white',
+    fontFamily: "Cochin"
   },
   logoContainer : {
     alignItems: "center"
@@ -106,12 +107,15 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: 'center',
     paddingBottom: 9,
+    fontFamily: "Cochin",
+    fontWeight: 'bold',
     // fontFamily: "SuezOne-Regular"
   },
   subtitle: {
     fontSize: 16,
     textAlign: 'center',
-    paddingBottom: 30
+    paddingBottom: 30,
+    fontFamily: "Optima",
   },
   inputContainer: {
     alignItems: 'center'
@@ -124,6 +128,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 15,
     paddingLeft: 10,
+    fontFamily: "Cochin"
   },
   button: {
     backgroundColor: '#F5CA56',
@@ -131,12 +136,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     width: 100,
-    marginBottom: 15
+    marginBottom: 15,
+    fontFamily: "Gill Sans"
   },
   accountButton: {
     fontSize: 16,
     color: '#ED5658',
-    marginBottom: 100
+    marginBottom: 100,
+    fontFamily: "Gill Sans"
   },
 });
 

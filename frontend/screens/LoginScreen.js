@@ -33,12 +33,17 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: 'center',
     paddingBottom: 9,
+    fontWeight: 'bold',
+    fontFamily: "Cochin"
     // fontFamily: "SuezOne-Regular"
   },
   subtitle: {
     fontSize: 16,
     textAlign: 'center',
-    paddingBottom: 30
+    paddingBottom: 30, 
+    // fontFamily: "Gill Sans",
+    // fontFamily: "Optima-Regular",
+    fontFamily: "Optima"
   },
   inputContainer: {
     alignItems: 'center'
@@ -51,6 +56,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 15,
     paddingLeft: 10,
+    fontFamily: "Cochin"
   },
   button: {
     backgroundColor: '#F5CA56',
@@ -63,7 +69,8 @@ const styles = StyleSheet.create({
   accountButton: {
     fontSize: 16,
     color: '#ED5658',
-    marginBottom: 100
+    marginBottom: 100,
+    fontFamily: "Gill Sans"
   },
 });
 
