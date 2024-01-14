@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/PublicSans-VariableFont_wght.ttf",
+      "sha1": "834d2d12208fd40f6cf84721e3ab8e3325cd0a42"
+    },
+    {
+      "path": "assets/fonts/SuezOne-Regular.ttf",
+      "sha1": "8578ca6ddd359b5bd8963e897004fe306356dc13"
+    }
+  ]
+}

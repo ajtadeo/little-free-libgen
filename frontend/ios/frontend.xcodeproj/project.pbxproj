@@ -15,6 +15,8 @@
 		7699B88040F8A987B510C191 /* libPods-frontend-frontendTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-frontend-frontendTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		DAFA740D6B2642689AC2936D /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1381010AD4EB29DD00B5F /* noop-file.swift */; };
+		E1A3F27E7FAE42F6AC918579 /* PublicSans-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86DE7952AFF741BBB9AB8986 /* PublicSans-VariableFont_wght.ttf */; };
+		B8E218BE3ABB4E8F8B0F7CAF /* SuezOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D3AB8E8A277467E9FB193F0 /* SuezOne-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-frontend-frontendTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontend-frontendTests.release.xcconfig"; path = "Target Support Files/Pods-frontend-frontendTests/Pods-frontend-frontendTests.release.xcconfig"; sourceTree = "<group>"; };
 		C5D03277D49447A49066C44F /* SplashScreen.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = SplashScreen.storyboard; path = frontend/SplashScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		86DE7952AFF741BBB9AB8986 /* PublicSans-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "PublicSans-VariableFont_wght.ttf"; path = "../assets/fonts/PublicSans-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6D3AB8E8A277467E9FB193F0 /* SuezOne-Regular.ttf */ = {isa = PBXFileReference; name = "SuezOne-Regular.ttf"; path = "../assets/fonts/SuezOne-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				6EE4876CD5834F818C320178 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -154,6 +159,16 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		6EE4876CD5834F818C320178 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				86DE7952AFF741BBB9AB8986 /* PublicSans-VariableFont_wght.ttf */,
+				6D3AB8E8A277467E9FB193F0 /* SuezOne-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -250,6 +265,8 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E1A3F27E7FAE42F6AC918579 /* PublicSans-VariableFont_wght.ttf in Resources */,
+				B8E218BE3ABB4E8F8B0F7CAF /* SuezOne-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
