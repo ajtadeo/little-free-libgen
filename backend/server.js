@@ -17,7 +17,7 @@ main().catch(err => console.log(err));
 
 // connect to mongoDB database
 async function main() {
-    mongoose.connect("mongodb+srv://root:root@libgenlibrary.iw0kaio.mongodb.net/library_db");
+    mongoose.connect("mongodb+srv://root:root@libgenlibrary.iw0kaio.mongodb.net/library_db?retryWrites=true&w=majority");
 }
 
 
