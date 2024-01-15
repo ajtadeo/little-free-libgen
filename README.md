@@ -8,6 +8,7 @@ Built by [Charles Bucquet](https://github.com/cbucquet), [Marcus Cheng](https://
 
 [Idea Hacks 2024 DevPost](https://devpost.com/software/little-free-libgen)
 
+## Demo Video:
 [![Watch the video](https://img.youtube.com/vi/c8D2FpurLIw/hqdefault.jpg)](https://youtu.be/c8D2FpurLIw)
 
 ## Tools Used
