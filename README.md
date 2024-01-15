@@ -8,7 +8,7 @@ Built by [Charles Bucquet](https://github.com/cbucquet), [Marcus Cheng](https://
 
 [Idea Hacks 2024 DevPost](https://devpost.com/software/little-free-libgen)
 
-<iframe width="786" height="556" src="https://www.youtube.com/embed/c8D2FpurLIw" title="Little Free Libgen (IDEA HACKS 2024 Submission)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[<iframe width="786" height="556" src="https://www.youtube.com/embed/c8D2FpurLIw" title="Little Free Libgen (IDEA HACKS 2024 Submission)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>](https://youtu.be/c8D2FpurLIw)
 
 ## Tools Used
 
